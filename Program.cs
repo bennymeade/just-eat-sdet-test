@@ -29,11 +29,62 @@ namespace JustEatApi
                         AddressCheck((JObject)rest);
                         RatingsCheck((JObject)rest);
                         UrlCheck(rest["Id"].ToString(), rest["Url"]?.ToString());
+
+                        // New requirements
+                        // 1. Validate that Name Exists
+                        if(string.IsNullOrWhiteSpace(rest["Name"]?.ToString()))
+                        {
+                            Console.WriteLine($"Name is missing for {rest["Id"]}");
+                        }
+
+                        // 2. Cuisine Types check
+                        CuisineTypeCheck((JObject)rest);
+
+                        // 3. If IsDelivery is true, then DeliveryStartTime should exist
+                        if(bool.TryParse(rest["IsDelivery"]?.ToString(), out bool isDelivery) && isDelivery)
+                        {
+                            if(!DateTime.TryParse(rest["DeliveryStartTime"]?.ToString(), out var deliveryStartTime))
+                            {
+                                Console.WriteLine($"DeliveryStartTime is missing or not a valid DateTime for {rest["Id"]} even though IsDelivery is true");
+                            }
+                        }
                     }
                     catch(Exception ex)
                     {
                         Console.WriteLine("Something failed " + ex);
                     }
+                }
+            }
+        }
+
+        static void CuisineTypeCheck(JObject rest)
+        {
+            JArray cuisineTypes = rest["CuisineTypes"] as JArray;
+            foreach (var ct in cuisineTypes)
+            {
+                if (ct == null)
+                {
+                    Console.WriteLine($"Cuisine Types are missing for {rest["Id"]}");
+                }
+
+                if (string.IsNullOrEmpty(ct["Id"]?.ToString()))
+                {
+                    Console.WriteLine($"Id is missing for CuisineType for {rest["Id"]}");
+                }
+
+                if (string.IsNullOrEmpty(ct["IsTopCuisine"]?.ToString()))
+                {
+                    Console.WriteLine($"IsTopCuisine is missing for CuisineType for {rest["Id"]}");
+                }
+
+                if (string.IsNullOrEmpty(ct["Name"]?.ToString()))
+                {
+                    Console.WriteLine($"Name is missing for CuisineType for {rest["Id"]}");
+                }
+
+                if (string.IsNullOrEmpty(ct["SeoName"]?.ToString()))
+                {
+                    Console.WriteLine($"SeoName is missing for CuisineType for {rest["Id"]}");
                 }
             }
         }
