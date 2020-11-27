@@ -1,17 +1,17 @@
 # just-eat-sdet-test
 
 ## Prerequisite
-Developed on MacOS with VSCode, therefore .Net Core for Mac is required.
+Developed on MacOS with VSCode, therefore .Net Core (v5.0) for Mac is required.
 
-## Dev steps
-$ dotnet new console
-
-$ dotnet add package NewtonSoft.Json
-
+## Build project
 $ dotnet restore
+
+(fyi this will add the obj folder)
 
 ## Run tests
 $ dotnet run
+
+(fyi this will add the bin folder)
 
 ## Notes
 I'm using a different postcode to reduce the size of the response data, in order for the tests to run faster. 
