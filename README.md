@@ -5,6 +5,7 @@ Developed on MacOS with VSCode, therefore .Net Core (v5.0) for Mac is required.
 
 ## Dev notes
 create project with $ dotnet new console
+
 add additonal packages $ add package NewtonSoft.Json
 
 ## Build project
