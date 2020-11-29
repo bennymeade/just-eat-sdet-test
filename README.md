@@ -3,11 +3,6 @@
 ## Prerequisite
 Developed on MacOS with VSCode, therefore .Net Core (v5.0) for Mac is required.
 
-## Dev notes
-create project with $ dotnet new console
-
-add additonal packages $ add package NewtonSoft.Json
-
 ## Build project
 $ dotnet restore
 
@@ -27,3 +22,8 @@ The 3 more requirement tests I added are:
 1. Validate that Name Exists
 2. Cuisine Types check
 3. If IsDelivery is true, then DeliveryStartTime should exist
+
+## Dev notes
+to create project used $ dotnet new console
+
+to add additonal packages used $ add package NewtonSoft.Json
